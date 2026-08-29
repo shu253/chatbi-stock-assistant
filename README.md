@@ -81,6 +81,20 @@ flowchart LR
 - pytest / Ruff / GitHub Actions
 - Tavily MCP、Node.js、npx
 
+## 关键设计与踩坑记录
+
+- **排序不可信**：模型生成的 SQL 中 ORDER BY 不稳定，在 exc_sql 工具层强制按
+  trade_date 升序排序，保证首/尾交易日数据正确
+- **禁止 MIN/MAX 取首尾价**：模型倾向用 MIN(close)/MAX(close) 计算区间首尾收盘价
+  （错误做法），在 system_prompt 中内置子查询模板显式约束
+- **参数幻觉防护**：模型可能对不在库中的股票编造 ts_code，工具侧先校验股票是否
+  存在于数据库，不存在直接返回错误提示
+- **依赖兼容**：mcp 2.x 与 qwen-agent 0.0.34 不兼容（streamablehttp_client API
+  变更），需固定 mcp<2；qwen-agent 0.0.34 的 RAG 依赖（jieba 等）未随包安装，
+  需 qwen-agent[rag]
+- **code_interpreter 移除**：qwen_agent 0.0.34 的 code_interpreter 存在 Docker
+  镜像构建路径问题，改为在工具内直接用 matplotlib 绘图并返回图片链接
+
 ## 快速开始
 
 ```powershell
