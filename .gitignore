@@ -17,13 +17,8 @@ image_show/
 workspace/
 *.log
 
-# Local datasets are intentionally not published by default.
-data/*.db
-data/*.sqlite
-data/*.sqlite3
-data/*.xlsx
-!data/.gitkeep
+# The portfolio repository intentionally publishes its demonstration dataset.
+# Keep ad-hoc local exports outside data/ or add a specific ignore rule here.
 
 .DS_Store
 Thumbs.db
-

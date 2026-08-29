@@ -1,5 +1,9 @@
 # 证券 ChatBI 助手
 
+[![CI](https://github.com/shu253/chatbi-stock-assistant/actions/workflows/ci.yml/badge.svg)](https://github.com/shu253/chatbi-stock-assistant/actions/workflows/ci.yml)
+[![Python 3.11](https://img.shields.io/badge/Python-3.11-3776AB?logo=python&logoColor=white)](https://www.python.org/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+
 面向证券业务场景的对话式商业智能应用。业务用户用自然语言提问，系统自动完成数据采集、SQL 查询、指标计算、自然语言解读和图表可视化，让不熟悉 SQL 的用户也能自助分析行情数据。
 
 本项目由原型主版本 `stock_query_assistant-4.py` 重构而来，面向 AI 应用开发岗位作品集进行工程化整理。
@@ -16,6 +20,24 @@
 - **RAG 口径补充**：通过 FAQ 知识文件补充涨跌幅等业务计算口径。
 - **安全执行边界**：模型 SQL 经过语句类型检查、只读连接、表白名单、超时和行数限制。
 - **工程化交付**：模块化源码、环境变量、离线测试、Ruff 和 GitHub Actions。
+
+## 运行效果
+
+### 自然语言查数与自动分析
+
+![自然语言生成 SQL、行情分析和图表输出](docs/images/text-to-sql.png)
+
+### ARIMA 价格预测
+
+![ARIMA 价格预测结果](docs/images/arima-forecast.png)
+
+### BOLL 异常检测
+
+![BOLL 上下轨突破检测](docs/images/boll-detection.png)
+
+### Tavily 实时新闻检索
+
+![Tavily 新闻搜索与利好利空归纳](docs/images/tavily-news.png)
 
 ## 系统架构
 
@@ -62,6 +84,11 @@ flowchart LR
 
 ## 快速开始
 
+```powershell
+git clone https://github.com/shu253/chatbi-stock-assistant.git
+cd chatbi-stock-assistant
+```
+
 ### 1. 创建 Python 3.11 环境
 
 ```powershell
@@ -93,15 +120,15 @@ DASHSCOPE_API_KEY=你的_DashScope_API_Key
 
 ### 3. 准备数据库
 
-方式 A：使用自己的 Tushare Token 重新获取数据。
+仓库已包含可直接运行的 `data/stock.db`，克隆后无需额外导入即可体验。
+
+如需使用最新数据，可通过自己的 Tushare Token 重新获取：
 
 ```powershell
 $env:TUSHARE_TOKEN="你的_Tushare_Token"
 python scripts/fetch_stock_prices.py
 python scripts/import_to_sqlite.py
 ```
-
-方式 B：本地已有原型数据库时，将其复制到 `data/stock.db`。请先确认数据再分发授权，仓库默认忽略该文件。
 
 ### 4. 启动应用
 
@@ -185,7 +212,8 @@ tests/                  SQL 安全、BOLL 和数据导入测试
 ## 数据与许可证
 
 - 源代码使用 [MIT License](LICENSE)。
-- 第三方行情数据不自动适用 MIT License，详见 [DATA_LICENSE.md](DATA_LICENSE.md)。
+- 仓库公开提供 6,318 条演示行情记录，详见 [DATA_LICENSE.md](DATA_LICENSE.md)。
+- 第三方行情数据不自动适用 MIT License。
 - 风险说明见 [DISCLAIMER.md](DISCLAIMER.md)。
 - 安全边界见 [SECURITY.md](SECURITY.md)。
 

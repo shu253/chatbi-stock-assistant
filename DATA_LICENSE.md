@@ -1,12 +1,20 @@
 # 数据来源与发布说明
 
-项目的数据采集脚本通过 Tushare API 获取证券日线行情。仓库默认不提交本地 Excel、SQLite 数据库和 API Token。
+仓库公开提供以下演示数据：
 
-公开发布完整行情数据前，请项目维护者自行确认数据供应商最新的授权范围、署名要求和再分发条件。本仓库的 MIT License 仅覆盖源代码，不自动覆盖第三方数据。
+- `data/stock_prices.xlsx`：Excel 格式的完整日线行情；
+- `data/stock.db`：应用可直接查询的 SQLite 数据库。
 
-推荐使用方式：
+数据通过 Tushare API 获取，覆盖贵州茅台、五粮液、上海九百和中芯国际，当前共
+6,318 条记录，日期范围为 2020-01-02 至 2026-08-27。
 
-1. 使用自己的 `TUSHARE_TOKEN` 运行 `scripts/fetch_stock_prices.py`；
-2. 运行 `scripts/import_to_sqlite.py` 构建本地数据库；
-3. 将生成的 `data/*.xlsx` 和 `data/*.db` 保持在 Git 忽略列表中。
+本仓库的 MIT License 仅覆盖源代码，不自动覆盖第三方行情数据。数据使用者应自行
+确认数据供应商最新的授权范围、署名要求和再分发条件；数据仅用于项目演示、学习与
+技术验证，不构成证券研究或投资建议。
 
+如需更新数据，可使用自己的 `TUSHARE_TOKEN` 运行：
+
+```powershell
+python scripts/fetch_stock_prices.py
+python scripts/import_to_sqlite.py
+```
