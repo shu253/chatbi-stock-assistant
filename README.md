@@ -73,7 +73,7 @@ flowchart LR
 ## 技术栈
 
 - Python 3.11
-- Qwen Agent / DashScope
+- Qwen Agent / DashScope / nanobot-ai
 - SQLite / pandas
 - matplotlib
 - statsmodels ARIMA
