@@ -58,7 +58,7 @@ flowchart LR
 - statsmodels ARIMA
 - Tushare / openpyxl
 - pytest / Ruff / GitHub Actions
-- 可选：Tavily MCP、Node.js、npx
+- Tavily MCP、Node.js、npx
 
 ## 快速开始
 
@@ -136,16 +136,23 @@ Text-to-SQL 应用不能只依赖提示词阻止危险 SQL。本项目在执行�
 5. 限制 SQL 长度、执行时间和最大返回行数；
 6. 内部查询使用参数化占位符。
 
-## 可选联网搜索
+## Tavily 联网搜索
 
-基础 ChatBI 不依赖 Node.js。只有同时满足以下条件时才启用 Tavily：
+项目默认启用与原型一致的 Tavily MCP 联网搜索。需要配置：
 
 ```dotenv
 CHATBI_ENABLE_WEB_SEARCH=true
 TAVILY_API_KEY=你的_Tavily_API_Key
 ```
 
-并确保本机已安装 Node.js 和 `npx`。否则应用自动降级到本地分析模式。
+并确保本机已安装 Node.js 和 `npx`。程序优先读取当前进程的 `TAVILY_API_KEY`，
+Windows 下读取不到时会回退到用户环境变量。
+
+如果只想使用本地 SQL、ARIMA 和 BOLL 功能，可以显式关闭联网搜索：
+
+```dotenv
+CHATBI_ENABLE_WEB_SEARCH=false
+```
 
 ## 测试与代码检查
 

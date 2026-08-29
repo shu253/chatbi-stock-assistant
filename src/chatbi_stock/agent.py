@@ -1,4 +1,4 @@
-"""Qwen Agent assembly and optional Tavily MCP integration."""
+"""Qwen Agent assembly and Tavily MCP integration."""
 
 from __future__ import annotations
 
@@ -67,13 +67,14 @@ def _build_function_list() -> list[object]:
     settings = get_settings()
     functions: list[object] = ["exc_sql", "arima_stock", "boll_detection"]
     if not settings.enable_web_search:
+        LOGGER.info("Tavily 联网搜索已通过 CHATBI_ENABLE_WEB_SEARCH=false 关闭")
         return functions
     if not settings.tavily_api_key:
-        LOGGER.warning("已启用联网搜索，但未配置 TAVILY_API_KEY；将以基础模式启动")
-        return functions
+        raise RuntimeError("Tavily 已启用，但未配置 TAVILY_API_KEY")
     if not shutil.which("npx"):
-        LOGGER.warning("已启用联网搜索，但未找到 npx；将以基础模式启动")
-        return functions
+        raise RuntimeError(
+            "Tavily 已启用，但未找到 npx；请先安装 Node.js，或设置 CHATBI_ENABLE_WEB_SEARCH=false"
+        )
 
     functions.append(
         {
