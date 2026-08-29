@@ -22,5 +22,4 @@ jobs:
       - name: Lint
         run: ruff check .
       - name: Test
-        run: pytest --cov=chatbi_stock --cov-report=term-missing
-
+        run: pytest

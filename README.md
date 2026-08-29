@@ -151,7 +151,7 @@ TAVILY_API_KEY=你的_Tavily_API_Key
 
 ```powershell
 ruff check .
-pytest --cov=chatbi_stock
+pytest
 ```
 
 测试不调用 DashScope 或 Tushare，不需要真实密钥。
@@ -188,4 +188,3 @@ tests/                  SQL 安全、BOLL 和数据导入测试
 - 支持用户配置股票池和更多指标；
 - 增加 SQL 展示、查询审计和会话级缓存；
 - 增加 Docker 与在线演示部署。
-

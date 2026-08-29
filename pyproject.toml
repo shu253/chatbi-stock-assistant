@@ -29,7 +29,6 @@ dependencies = [
 [project.optional-dependencies]
 dev = [
   "pytest>=8.0,<9",
-  "pytest-cov>=5.0,<7",
   "ruff>=0.6,<1",
 ]
 
@@ -52,4 +51,3 @@ select = ["E", "F", "I", "B", "UP", "SIM"]
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 addopts = "-q"
-
