@@ -1,0 +1,55 @@
+[build-system]
+requires = ["setuptools>=69", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "chatbi-stock-assistant"
+version = "0.1.0"
+description = "面向证券行情分析的对话式商业智能助手"
+readme = "README.md"
+requires-python = ">=3.11,<3.12"
+license = { text = "MIT" }
+authors = [{ name = "ChatBI Stock Assistant contributors" }]
+keywords = ["chatbi", "text-to-sql", "qwen", "stock-analysis", "business-intelligence"]
+dependencies = [
+  "dashscope>=1.20,<2",
+  "qwen-agent[gui,rag,mcp]>=0.0.29,<1",
+  "pandas>=2.1,<3",
+  "SQLAlchemy>=2.0,<3",
+  "matplotlib>=3.8,<4",
+  "numpy>=1.26,<3",
+  "statsmodels>=0.14,<1",
+  "tushare>=1.4,<2",
+  "openpyxl>=3.1,<4",
+  "tabulate>=0.9,<1",
+  "python-dotenv>=1.0,<2",
+  "sqlparse>=0.5,<1",
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=8.0,<9",
+  "pytest-cov>=5.0,<7",
+  "ruff>=0.6,<1",
+]
+
+[project.scripts]
+chatbi-stock = "chatbi_stock.app:main"
+
+[tool.setuptools]
+package-dir = { "" = "src" }
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.ruff]
+target-version = "py311"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP", "SIM"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+

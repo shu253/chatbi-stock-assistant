@@ -1,0 +1,29 @@
+.env
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+dist/
+build/
+
+# Runtime-generated files
+runtime/
+image_show/
+workspace/
+*.log
+
+# Local datasets are intentionally not published by default.
+data/*.db
+data/*.sqlite
+data/*.sqlite3
+data/*.xlsx
+!data/.gitkeep
+
+.DS_Store
+Thumbs.db
+
